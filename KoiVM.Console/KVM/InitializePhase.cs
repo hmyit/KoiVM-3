@@ -59,20 +59,20 @@ namespace KVM
 
         public void MarkPhase(ModuleDef module)
         {
-            string eddyType = "Koi";
+            string koiType = "Koi";
             var vr = (Virtualizer)VirtualizerKey;
 
             var refRepl = new Dictionary<IMemberRef, IMemberRef>();
 
             var oldType = module.GlobalType;
             var newType = new TypeDefUser(oldType.Name);
-            oldType.Name = eddyType;
+            oldType.Name = koiType;
             oldType.BaseType = module.CorLibTypes.GetTypeRef("System", "Object");
             module.Types.Insert(0, newType);
 
             var old_cctor = oldType.FindOrCreateStaticConstructor();
             var cctor = newType.FindOrCreateStaticConstructor();
-            old_cctor.Name = eddyType;
+            old_cctor.Name = koiType;
             old_cctor.IsRuntimeSpecialName = false;
             old_cctor.IsSpecialName = false;
             old_cctor.Access = MethodAttributes.PrivateScope;
